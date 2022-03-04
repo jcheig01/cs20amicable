@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Amicable Numbers</title>
+        <link rel="stylesheet" href="index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background-color: burlywood;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Amicable Numbers</h1>
+            <hr>
+        </header>
+        <article>
+            <section>
+                <div class="content">
+                    <p>Check If Two Numbers Are Amicable!</p>
+                    <form>
+                        <input id="x" type="number" placeholder="x" style="width: 50px;">
+                        <input id="y" type="number" placeholder="y" style="width: 50px;">
+                        <input type="button" value="Check" onclick="compute()">
+                    </form>
+               </div>
+               <div class="content2">
+                    <p id="result"></p>
+               </div>
+               <div class="content3">
+                    <p id="x_arr"></p>
+                    <p id="y_arr"></p>
+               </div>
+            </section>
+        </article>
+        <footer>CS20 Assignment 6: Amicable Numbers</footer>
+    </body>
+    <script language="javascript">
+
+        function compute () {
+            var x = document.getElementById('x').value;
+            var y = document.getElementById('y').value;
+
+            var x_arr = [1];
+            var y_arr = [1];
+
+            for (var i=2; i < x/2 + 1; i++) {
+                if (isAFactor(x, i)) {
+                    x_arr.push(i);
+                }
+            }
+
+            for (var i=2; i < y/2 + 1; i++) {
+                if (isAFactor(y, i)) {
+                    y_arr.push(i);
+                }
+            }
+
+            var x_sum = x_arr.reduce((a, b) => a + b, 0);
+            var y_sum = y_arr.reduce((a, b) => a + b, 0);
+
+            printResult(x_sum, y_sum, x, y, x_arr, y_arr);
+        }
+
+        function isAFactor(x, y) {
+            return x % y == 0;
+        }
+
+        function printResult(x_sum, y_sum, x, y, x_arr, y_arr) {
+            if (x_sum == y && y_sum == x) {
+                document.getElementById('result').innerHTML = "The numbers: " + x + " and " + y + " are amicable"
+            } else {
+                document.getElementById('result').innerHTML = "The numbers: " + x + " and " + y + " are not amicable"
+            }
+
+            document.getElementById('x_arr').innerHTML = "Factors of x: " + x_arr;
+            document.getElementById('y_arr').innerHTML = "Factors of y: " + y_arr;
+        }
+    </script>
+</html>
